@@ -12,4 +12,8 @@ class Captain < ActiveRecord::Base
   def self.sailors
     Captain.joins(boats: :classifications).where(classifications: {name: 'Sailboat'}).uniq
   end
+
+  def self.talented_seafarers
+    where("id IN (?)", Captain.sailors.pluck(:id) & Captain.motorboats.pluck(:id))
+  end
 end
