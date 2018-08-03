@@ -4,4 +4,8 @@ class Captain < ActiveRecord::Base
   def self.catamaran_operators
     Captain.joins(boats: :classifications).where(classifications: {name: "Catamaran"}).uniq
   end
+
+  def self.motorboats
+    Captain.joins(boats: :classifications).where(classifications: {name: 'Motorboat'}).uniq
+  end
 end
